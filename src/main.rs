@@ -9,10 +9,12 @@ enum GameState {
 
 fn main() {
     let mut game_state = GameState::Title;
-    let target_num = rand::thread_rng().gen_range(1..=100);
+    let lower_number = 1;
+    let higher_number = 100;
+    let target_num = rand::thread_rng().gen_range(lower_number..=higher_number);
     let mut guesses = 0;
 
-    println!("Number is between 1-100.");
+    println!("Number is between {}-{}.", lower_number, higher_number);
     game_state = GameState::Playing;
     while GameState::Playing == game_state {
         let mut line: String = text_io::read!("{}\n");
