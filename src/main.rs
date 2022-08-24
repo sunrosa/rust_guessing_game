@@ -17,9 +17,8 @@ fn main() {
     println!("Number is between {}-{}.", lower_number, higher_number);
     game_state = GameState::Playing;
     while GameState::Playing == game_state {
-        let mut line: String = text_io::read!("{}\n");
-        line.pop();
-        match line.parse::<i32>() {
+        let line: String = text_io::read!("{}\n");
+        match line.trim().parse::<i32>() {
             Ok(val) => {
                 if val == target_num {
                     game_state = GameState::Won;
