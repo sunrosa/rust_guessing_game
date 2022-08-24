@@ -4,7 +4,7 @@ use rand::Rng;
 enum GameState {
     Title,
     Playing,
-    Won
+    Won,
 }
 
 fn main() {
@@ -23,23 +23,24 @@ fn main() {
                 if val == target_num {
                     game_state = GameState::Won;
                     break;
-                }
-                else if target_num > val {
+                } else if target_num > val {
                     println!("Greater than {}.", val);
-                }
-                else if target_num < val {
+                } else if target_num < val {
                     println!("Less than {}.", val);
                 }
                 guesses += 1;
-            },
+            }
             Err(_) => {
                 println!("Invalid input.");
                 continue;
             }
         }
-    };
+    }
 
     if game_state == GameState::Won {
-        println!("You won in {} guesses. The number was {}.", guesses, target_num);
+        println!(
+            "You won in {} guesses. The number was {}.",
+            guesses, target_num
+        );
     }
 }
