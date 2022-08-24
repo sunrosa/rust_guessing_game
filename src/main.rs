@@ -33,19 +33,12 @@ fn main() {
                 }
                 guesses += 1;
             },
-            Err(err) => {
-                match err.kind() {
-                    std::num::IntErrorKind::InvalidDigit => {
-                        println!("Invalid input.");
-                        continue;
-                    },
-                    _ => {
-                        panic!();
-                    }
-                }
+            Err(_) => {
+                println!("Invalid input.");
+                continue;
             }
-        };
-    }
+        }
+    };
 
     if game_state == GameState::Won {
         println!("You won in {} guesses. The number was {}.", guesses, target_num);
