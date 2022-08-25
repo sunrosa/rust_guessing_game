@@ -62,6 +62,12 @@ fn write_storage(stats: &Stats) {
 }
 
 fn read_storage() -> Stats {
-    let serialized = std::fs::read_to_string("stats.json").expect("Unable to read file.");
-    serde_json::from_str(&serialized).unwrap()
+    let serialized = std::fs::read_to_string("stats.json");
+    match serialized {
+        Ok(s) => serde_json::from_str(&s).unwrap(),
+        Err(e) => match e.kind() {
+            std::io::ErrorKind::NotFound => Stats{guesses: 0},
+            _ => panic!("Problem reading from file: {:?}", e)
+        }
+    }
 }
